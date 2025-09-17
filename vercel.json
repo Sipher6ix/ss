@@ -1,7 +1,7 @@
 {
   "version": 2,
   "env": {
-    "OPENROUTER_API_KEY": "@openrouter-api-key"
+    "OPENROUTER_API_KEY": "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"
   },
   "rewrites": [
     {
