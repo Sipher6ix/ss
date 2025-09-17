@@ -1,13 +1,56 @@
+import Head from 'next/head';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 
-export default async function handler(req: any, res: any) {
-  const { input } = req.body;
-  const openRouterApiKey = process.env.OPENROUTER_API_KEY;
+const Home = () => {
+  const [userInput, setUserInput] = useState('');
+  const [aiResponse, setAiResponse] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const response = await axios.post(`https://api.openrouter.ai/llama-ai`, {
-    input,
-    API_KEY: openRouterApiKey,
-  });
+  const handleUserInput = (event) => {
+    setUserInput(event.target.value);
+  };
 
-  res.status(200).json(response.data);
-}
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    axios
+      .post('/api/llama-ai', { input: userInput })
+      .then((response) => {
+        setAiResponse(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  };
+
+  return (
+    <Container>
+      <Head>
+        <title>Llama AI Chat</title>
+      </Head>
+      <Row className="justify-content-center">
+        <Col md={6}>
+          <h1>Llama AI Chat</h1>
+          <InputGroup>
+            <FormControl
+              type="text"
+              value={userInput}
+              onChange={handleUserInput}
+              placeholder="Ask me a question"
+            />
+            <Button variant="primary" onClick={handleSubmit}>
+              Ask
+            </Button>
+          </InputGroup>
+          {loading ? <p>Loading...</p> : <p>{aiResponse}</p>}
+        </Col>
+      </Row>
+    </Container>
+  );
+};
+
+export default Home;
