@@ -1,0 +1,28 @@
+{
+  "name": "llama-ai-chat",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "귀	files": {
+    "type": "module"
+  },
+  "dependencies": {
+    "axios": "^1.1.2",
+    "bootstrap": "^5.2.0",
+    "next": "^12.3.1",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.6.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "eslint": "^8.23.0",
+    "eslint-config-next": "^12.3.1",
+    "typescript": "^4.8.4"
+  }
+}
